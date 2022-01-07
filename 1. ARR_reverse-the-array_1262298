@@ -1,0 +1,34 @@
+//https://www.codingninjas.com/codestudio/problems/reverse-the-array_1262298
+//arr = {0, 1, 2, 3, 4, 5};
+//m = 6
+//size = 6
+    
+//1. if m > size, return
+//2. if m == size, return
+//3. if m < size, 
+//   reverse m+1 to size
+   
+void reverseArray(vector<int> &arr , int m)
+{
+	// Write your code here.
+    if (m >= arr.size()) {
+        return;
+    }
+
+    int i = m + 1;
+    int j = arr.size() - 1;
+    
+    while (i < j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        i++;
+        j--;
+    }
+}
+
+
+
+
+
+ 
