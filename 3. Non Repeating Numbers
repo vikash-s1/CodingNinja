@@ -1,0 +1,75 @@
+Non Repeating Numbers
+
+https://practice.geeksforgeeks.org/problems/finding-the-numbers0215/1
+
+https://www.geeksforgeeks.org/find-two-non-repeating-elements-in-an-array-of-repeating-elements/
+
+
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+class Solution
+{
+public:
+    vector<int> singleNumber(vector<int> nums) 
+    {
+        // Code here.
+        int n = nums.size();
+
+        vector<int> res;
+        int result_num1 = 0;
+        int result_num2 = 0;
+        
+        if (n == 0) {
+            return res;
+        }  
+
+        int Xor = nums[0];
+        for (int i = 1; i < n; i++) {
+            Xor = Xor ^ nums[i];
+        }
+
+        // get the last set bit
+        int rightmost_set_bit = Xor & ~(Xor - 1);
+        
+        for (int i = 0; i < n; i++) {
+            if (nums[i] & rightmost_set_bit) {
+                result_num1 = nums[i] ^ result_num1;
+            } else {
+                result_num2 = result_num2 ^ nums[i];
+            }
+        }
+        
+        if (result_num1 > result_num2) {
+            res.push_back(result_num2);
+            res.push_back(result_num1);
+        } else {
+            res.push_back(result_num1);
+            res.push_back(result_num2);
+        }
+        
+        return res;
+    }
+};
+
+// { Driver Code Starts.
+int main(){
+    int T;
+    cin >> T;
+    while(T--)
+    {
+    	int n; 
+    	cin >> n;
+    	vector<int> v(2 * n + 2);
+    	for(int i = 0; i < 2 * n + 2; i++)
+    		cin >> v[i];
+    	Solution ob;
+    	vector<int > ans = ob.singleNumber(v);
+    	for(auto i: ans)
+    		cout << i << " ";
+    	cout << "\n";
+    }
+	return 0;
+}  // } Driver Code Ends
